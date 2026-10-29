@@ -12,23 +12,24 @@ public class CNRunner extends PApplet {
         loadPixels();
         for(int p = 0; p < pixels.length; p++){
             int x = p%width;
-            int y = p/height;
+            int y = p/width;
             int ColWeight = 0;
-            for(int i = 0; i < 500; i++){
+            ComplexNumber res = new ComplexNumber((x-R)/(R*0.75),(y-R)/(R*0.75));
+            for(; ColWeight < 500; ColWeight++){
                 ColWeight++;
-                ComplexNumber res = new ComplexNumber(x-R,y-R);
                 res=res.times(res).plus(C);
-                if(res.getModulus() < 1){break;}
+                if(res.getModulus()> 2){break;}
             }
-            double hue = ColWeight*360/500;
-            double val = 80;
-            double sat = 80;
+            double hue = ColWeight/500;
+            double val = 0.8;
+            double sat = 0.8;
             System.out.println(ColWeight);
             //Color.getHSBColor((int)hue,(int)sat,(int)val).getRGB()
             //ColWeight == 0?Color.WHITE.getRGB():Color.BLACK.getRGB()
-            pixels[p] = Color.getHSBColor((int)hue,(int)sat,(int)val).getRGB();
-            updatePixels();
+            pixels[p] = ColWeight == 0?Color.WHITE.getRGB():Color.BLACK.getRGB();
+
         }
+        updatePixels();
     }
     public static void main(String[] args){PApplet.main("CNRunner");}
 }
