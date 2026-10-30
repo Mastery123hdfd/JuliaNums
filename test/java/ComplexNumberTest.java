@@ -141,4 +141,13 @@ public class ComplexNumberTest {
         assertEquals(new ComplexNumber(-3,-4),c3.getConjugate());
         assertEquals(new ComplexNumber(-3,4),c4.getConjugate());
     }
+    @Test
+    public void testExtraCreditPow() {
+        ComplexNumber a1 = new ComplexNumber(1.0,2.0);
+        ComplexNumber b1 = new ComplexNumber(3.0,4.0);
+        ComplexNumber result = new ComplexNumber(.1290095941,.0339240929);
+        assertEquals(result.getReal(),a1.pow(b1).getReal(),.001);
+        assertEquals(result.getImaginary(),a1.pow(b1).getImaginary(),.001);
+    }
+
 }
